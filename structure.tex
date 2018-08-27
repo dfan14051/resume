@@ -17,16 +17,21 @@
 
 \usepackage[a4paper, hmargin=25mm, vmargin=30mm, top=20mm]{geometry} % Use A4 paper and set margins
 
+\usepackage{paralist}
+\usepackage{enumitem}
+
 \usepackage{fancyhdr} % Customize the header and footer
 
 \usepackage{lastpage} % Required for calculating the number of pages in the document
 
 \usepackage{hyperref} % Colors for links, text and headings
 
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{0pt}{2ex}{1ex}
 \setcounter{secnumdepth}{0} % Suppress section numbering
 
-%\usepackage[proportional,scaled=1.064]{erewhon} % Use the Erewhon font
-%\usepackage[erewhon,vvarbb,bigdelims]{newtxmath} % Use the Erewhon font
+% \usepackage[proportional,scaled=1.064]{erewhon} % Use the Erewhon font
+% \usepackage[erewhon,vvarbb,bigdelims]{newtxmath} % Use the Erewhon font
 \usepackage[utf8]{inputenc} % Required for inputting international characters
 \usepackage[T1]{fontenc} % Output font encoding for international characters
 
@@ -45,8 +50,8 @@ SmallCapsFeatures = {Letters = SmallCaps}
 \usepackage{sectsty} % Allows customization of titles
 \sectionfont{\color{slateblue}} % Color section titles
 
-\fancypagestyle{plain}{\fancyhf{}\cfoot{\thepage\ of \pageref{LastPage}}} % Define a custom page style
-\pagestyle{plain} % Use the custom page style through the document
+% \fancypagestyle{plain}{\fancyhf{}\cfoot{\thepage\ of \pageref{LastPage}}} % Define a custom page style
+\pagestyle{empty} % Use the custom page style through the document
 \renewcommand{\headrulewidth}{0pt} % Disable the default header rule
 \renewcommand{\footrulewidth}{0pt} % Disable the default footer rule
 
@@ -54,8 +59,8 @@ SmallCapsFeatures = {Letters = SmallCaps}
 
 % Non-indenting itemize
 \newenvironment{itemize-noindent}
-{\setlength{\leftmargini}{0em}\begin{itemize}}
-{\end{itemize}}
+{\setlength{\leftmargini}{0em}\begin{compactitem}}
+{\end{compactitem}}
 
 % Text width for tabbing environments
 \newlength{\smallertextwidth}
@@ -71,6 +76,7 @@ SmallCapsFeatures = {Letters = SmallCaps}
 \renewcommand{\title}[1]{
 {\huge{\color{slateblue}\textbf{#1}}}\\ % Header section name and color
 \rule{\textwidth}{0.5mm}\\ % Rule under the header
+\vspace{-1em}
 }
 
 %----------------------------------------------------------------------------------------
@@ -80,14 +86,41 @@ SmallCapsFeatures = {Letters = SmallCaps}
 \newcommand{\job}[6]{
 \begin{tabbing}
 \hspace{2cm} \= \kill
-\textbf{#1} \> \href{#4}{#3} \\
+    \textbf{#1} \> \textbf{#3}#4 \\
 \textbf{#2} \>\+ \textit{#5} \\
 \begin{minipage}{\smallertextwidth}
 \vspace{2mm}
 #6
 \end{minipage}
 \end{tabbing}
-\vspace{2mm}
+\vspace{-1em}
+}
+
+%----------------------------------------------------------------------------------------
+%	ACTIVITIES COMMAND
+%----------------------------------------------------------------------------------------
+
+\newcommand{\activity}[4]{
+\begin{tabbing}
+\hspace{2cm} \= \kill
+    \textbf{#1} \> \textbf{#3} \\
+\textbf{#2} \>\+ \textit{#4} 
+\end{tabbing}
+\vspace{-1em}
+}
+
+%----------------------------------------------------------------------------------------
+%	PROJECTS COMMAND
+%----------------------------------------------------------------------------------------
+
+\newcommand{\project}[2]{
+\begin{tabbing}
+\hspace{5mm} \= \kill
+\sqbullet \>\+ \textbf{#1} \\
+\begin{minipage}{\smallertextwidth}
+#2
+\end{minipage}
+\end{tabbing}
 }
 
 %----------------------------------------------------------------------------------------
@@ -97,11 +130,7 @@ SmallCapsFeatures = {Letters = SmallCaps}
 \newcommand{\skillgroup}[2]{
 \begin{tabbing}
 \hspace{5mm} \= \kill
-\sqbullet \>\+ \textbf{#1} \\
-\begin{minipage}{\smallertextwidth}
-\vspace{2mm}
-#2
-\end{minipage}
+\sqbullet \>\+ \textbf{#1} #2
 \end{tabbing}
 }
 
